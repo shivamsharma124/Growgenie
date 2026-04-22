@@ -88,7 +88,7 @@ export default function LoginPage() {
               onChange={onChange} error={errors.password} />
 
             <Button type="submit" className="w-full mt-2" loading={loading}>
-              Login → Get JWT Token
+              Login 
             </Button>
           </form>
 

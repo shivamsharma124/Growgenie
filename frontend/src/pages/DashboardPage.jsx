@@ -64,7 +64,7 @@ export default function DashboardPage() {
           Welcome back, {user?.name?.split(" ")[0]} 👋
         </h1>
         <p className="text-sm text-gray-400 dark:text-gray-500 mt-0.5 font-dm">
-          Your AI business dashboard — Spring Boot + JWT + OpenAI
+          Your AI business dashboard 
         </p>
       </div>
 
