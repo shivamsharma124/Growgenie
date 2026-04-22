@@ -14,15 +14,6 @@ const MODULES = [
   { to: "/marketing", icon: "🌐", name: "Multilingual Translator", desc: "Campaigns in Hindi, Tamil, Bengali, Marathi" },
 ];
 
-const STACK = [
-  ["⚙️", "Spring Boot 3.x",    "REST API backend"],
-  ["🔐", "JWT + Spring Security","Role-based auth"],
-  ["🗄️", "MySQL + JPA",         "Data persistence"],
-  ["✦",  "OpenAI GPT-4",        "AI features"],
-  ["📄", "iText 7",             "PDF invoices"],
-  ["📋", "Swagger UI",          "API docs"],
-];
-
 export default function DashboardPage() {
   const { user, updateUser } = useAuth();
   const navigate = useNavigate();
@@ -128,22 +119,6 @@ export default function DashboardPage() {
           <div className="text-xs text-gray-400 dark:text-gray-500 font-dm space-y-1 pt-3 border-t border-gray-100 dark:border-[#2a2a3d]">
             <p>✓ All 6 AI modules • ✓ PDF invoices • ✓ FAQ bot</p>
             <p>✓ Multi-language • ✓ Unlimited products</p>
-          </div>
-        </Card>
-
-        {/* Backend stack */}
-        <Card>
-          <h2 className="font-syne font-bold text-gray-700 dark:text-white mb-4">Backend Stack</h2>
-          <div className="space-y-2">
-            {STACK.map(([icon, name, desc]) => (
-              <div key={name} className="flex items-center justify-between bg-gray-50 dark:bg-[#1a1a26] rounded-lg px-3 py-2">
-                <div className="flex items-center gap-2">
-                  <span className="text-sm">{icon}</span>
-                  <span className="text-xs font-medium text-gray-700 dark:text-gray-200 font-dm">{name}</span>
-                </div>
-                <span className="text-xs text-gray-400 dark:text-gray-500 font-dm">{desc}</span>
-              </div>
-            ))}
           </div>
         </Card>
       </div>
