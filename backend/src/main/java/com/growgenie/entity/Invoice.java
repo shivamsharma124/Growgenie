@@ -1,15 +1,13 @@
 package com.growgenie.entity;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "invoices")
+@Document(collection = "invoices")
 @Data
 @Builder
 @NoArgsConstructor
@@ -17,37 +15,27 @@ import java.time.LocalDateTime;
 public class Invoice {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private String userId;
 
     private String customerName;
     private String customerEmail;
 
-    // JSON string of items: [{"name":"Chai","qty":2,"price":299}]
-    @Column(columnDefinition = "TEXT")
+    // JSON string of items
     private String itemsJson;
 
     private Double subtotal;
     private Double gst;
     private Double total;
 
-    @Enumerated(EnumType.STRING)
-    private InvoiceStatus status;
+    @Builder.Default
+    private InvoiceStatus status = InvoiceStatus.UNPAID;
 
     private String pdfPath;
 
-    @Column(updatable = false)
+    @CreatedDate
     private LocalDateTime createdAt;
-
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-        if (status == null) status = InvoiceStatus.UNPAID;
-    }
 
     public enum InvoiceStatus {
         PAID, UNPAID, PENDING

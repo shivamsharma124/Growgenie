@@ -24,7 +24,7 @@ public class ProductService {
     public ProductResponse create(String email, ProductRequest request) {
         User user = getUser(email);
         Product product = Product.builder()
-                .user(user)
+                .userId(user.getId())
                 .name(request.getName())
                 .description(request.getDescription())
                 .category(request.getCategory())
@@ -40,14 +40,14 @@ public class ProductService {
                 .stream().map(this::toResponse).collect(Collectors.toList());
     }
 
-    public ProductResponse getById(String email, Long id) {
+    public ProductResponse getById(String email, String id) {
         User user = getUser(email);
         Product product = productRepository.findByIdAndUserId(id, user.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
         return toResponse(product);
     }
 
-    public ProductResponse update(String email, Long id, ProductRequest request) {
+    public ProductResponse update(String email, String id, ProductRequest request) {
         User user = getUser(email);
         Product product = productRepository.findByIdAndUserId(id, user.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
@@ -62,7 +62,7 @@ public class ProductService {
     }
 
     @Transactional
-    public void delete(String email, Long id) {
+    public void delete(String email, String id) {
         User user = getUser(email);
         productRepository.findByIdAndUserId(id, user.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));

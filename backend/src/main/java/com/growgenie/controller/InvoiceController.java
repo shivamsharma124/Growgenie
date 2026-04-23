@@ -43,7 +43,7 @@ public class InvoiceController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Get invoice by ID")
-    public ResponseEntity<ApiResponse<InvoiceResponse>> getById(Authentication auth, @PathVariable Long id) {
+    public ResponseEntity<ApiResponse<InvoiceResponse>> getById(Authentication auth, @PathVariable String id) {
         return ResponseEntity.ok(ApiResponse.ok(invoiceService.getById(auth.getName(), id)));
     }
 
@@ -51,7 +51,7 @@ public class InvoiceController {
     @Operation(summary = "Update invoice status: PAID, UNPAID, PENDING")
     public ResponseEntity<ApiResponse<InvoiceResponse>> updateStatus(
             Authentication auth,
-            @PathVariable Long id,
+            @PathVariable String id,
             @RequestParam Invoice.InvoiceStatus status) {
         return ResponseEntity.ok(ApiResponse.ok("Status updated",
                 invoiceService.updateStatus(auth.getName(), id, status)));
@@ -59,7 +59,7 @@ public class InvoiceController {
 
     @GetMapping("/{id}/download")
     @Operation(summary = "Download invoice PDF")
-    public ResponseEntity<Resource> download(Authentication auth, @PathVariable Long id) {
+    public ResponseEntity<Resource> download(Authentication auth, @PathVariable String id) {
         String path = invoiceService.getPdfPath(auth.getName(), id);
         Resource resource = new FileSystemResource(path);
         return ResponseEntity.ok()

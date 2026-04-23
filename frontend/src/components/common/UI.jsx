@@ -87,9 +87,9 @@ export function Select({ label, children, className = "", ...props }) {
 }
 
 // ─── Card ─────────────────────────────────────────────────────────────────────
-export function Card({ children, className = "" }) {
+export function Card({ children, className = "", ...props }) {
   return (
-    <div className={`bg-white dark:bg-[#12121a] border border-gray-100 dark:border-[#2a2a3d] rounded-2xl p-5 ${className}`}>
+    <div className={`bg-white dark:bg-[#12121a] border border-gray-100 dark:border-[#2a2a3d] rounded-2xl p-5 ${className}`} {...props}>
       {children}
     </div>
   );

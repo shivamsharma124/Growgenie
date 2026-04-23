@@ -95,7 +95,7 @@ public class AiPlannerService {
 
     private AiResponse saveAndReturn(User user, AiGeneration.GenerationType type, String prompt, String result) {
         AiGeneration gen = AiGeneration.builder()
-                .user(user).type(type).prompt(prompt).result(result).build();
+                .userId(user.getId()).type(type).prompt(prompt).result(result).build();
         return toResponse(aiGenerationRepository.save(gen));
     }
 

@@ -23,7 +23,7 @@ public class FaqService {
     public FaqResponse train(String email, FaqRequest request) {
         User user = getUser(email);
         Faq faq = Faq.builder()
-                .user(user)
+                .userId(user.getId())
                 .question(request.getQuestion())
                 .answer(request.getAnswer())
                 .build();
@@ -36,7 +36,7 @@ public class FaqService {
                 .stream().map(this::toResponse).collect(Collectors.toList());
     }
 
-    public void delete(String email, Long id) {
+    public void delete(String email, String id) {
         User user = getUser(email);
         Faq faq = faqRepository.findByIdAndUserId(id, user.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("FAQ not found: " + id));

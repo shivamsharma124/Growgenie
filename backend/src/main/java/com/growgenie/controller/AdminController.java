@@ -30,14 +30,14 @@ public class AdminController {
 
     @DeleteMapping("/users/{id}")
     @Operation(summary = "Delete a user by ID")
-    public ResponseEntity<ApiResponse<Void>> deleteUser(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse<Void>> deleteUser(@PathVariable String id) {
         adminService.deleteUser(id);
         return ResponseEntity.ok(ApiResponse.ok("User deleted", null));
     }
 
     @PutMapping("/users/{id}/promote")
     @Operation(summary = "Promote user to ADMIN role")
-    public ResponseEntity<ApiResponse<AuthResponse>> promoteToAdmin(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse<AuthResponse>> promoteToAdmin(@PathVariable String id) {
         return ResponseEntity.ok(ApiResponse.ok("User promoted to admin",
                 adminService.promoteToAdmin(id)));
     }

@@ -37,20 +37,20 @@ public class ProductController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Get product by ID")
-    public ResponseEntity<ApiResponse<ProductResponse>> getById(Authentication auth, @PathVariable Long id) {
+    public ResponseEntity<ApiResponse<ProductResponse>> getById(Authentication auth, @PathVariable String id) {
         return ResponseEntity.ok(ApiResponse.ok(productService.getById(auth.getName(), id)));
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Update a product")
     public ResponseEntity<ApiResponse<ProductResponse>> update(
-            Authentication auth, @PathVariable Long id, @Valid @RequestBody ProductRequest request) {
+            Authentication auth, @PathVariable String id, @Valid @RequestBody ProductRequest request) {
         return ResponseEntity.ok(ApiResponse.ok("Product updated", productService.update(auth.getName(), id, request)));
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a product")
-    public ResponseEntity<ApiResponse<Void>> delete(Authentication auth, @PathVariable Long id) {
+    public ResponseEntity<ApiResponse<Void>> delete(Authentication auth, @PathVariable String id) {
         productService.delete(auth.getName(), id);
         return ResponseEntity.ok(ApiResponse.ok("Product deleted", null));
     }

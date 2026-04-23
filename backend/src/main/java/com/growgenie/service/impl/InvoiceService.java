@@ -54,7 +54,7 @@ public class InvoiceService {
         String itemsJson = objectMapper.writeValueAsString(request.getItems());
 
         Invoice invoice = Invoice.builder()
-                .user(user)
+                .userId(user.getId())
                 .customerName(request.getCustomerName())
                 .customerEmail(request.getCustomerEmail())
                 .itemsJson(itemsJson)
@@ -80,14 +80,14 @@ public class InvoiceService {
                 .stream().map(this::toResponse).collect(Collectors.toList());
     }
 
-    public InvoiceResponse getById(String email, Long id) {
+    public InvoiceResponse getById(String email, String id) {
         User user = getUser(email);
         Invoice invoice = invoiceRepository.findByIdAndUserId(id, user.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Invoice not found: " + id));
         return toResponse(invoice);
     }
 
-    public InvoiceResponse updateStatus(String email, Long id, Invoice.InvoiceStatus status) {
+    public InvoiceResponse updateStatus(String email, String id, Invoice.InvoiceStatus status) {
         User user = getUser(email);
         Invoice invoice = invoiceRepository.findByIdAndUserId(id, user.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Invoice not found: " + id));
@@ -95,7 +95,7 @@ public class InvoiceService {
         return toResponse(invoiceRepository.save(invoice));
     }
 
-    public String getPdfPath(String email, Long id) {
+    public String getPdfPath(String email, String id) {
         User user = getUser(email);
         Invoice invoice = invoiceRepository.findByIdAndUserId(id, user.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Invoice not found: " + id));

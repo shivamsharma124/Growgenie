@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AiResponse {
-    private Long id;
+    private String id;
     private AiGeneration.GenerationType type;
     private String prompt;
     private String result;

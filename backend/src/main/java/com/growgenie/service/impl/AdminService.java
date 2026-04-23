@@ -23,13 +23,13 @@ public class AdminService {
                 .collect(Collectors.toList());
     }
 
-    public void deleteUser(Long id) {
+    public void deleteUser(String id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found: " + id));
         userRepository.delete(user);
     }
 
-    public AuthResponse promoteToAdmin(Long id) {
+    public AuthResponse promoteToAdmin(String id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found: " + id));
         user.setRole(User.Role.ADMIN);

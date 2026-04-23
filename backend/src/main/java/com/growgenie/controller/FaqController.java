@@ -37,7 +37,7 @@ public class FaqController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete an FAQ entry")
-    public ResponseEntity<ApiResponse<Void>> delete(Authentication auth, @PathVariable Long id) {
+    public ResponseEntity<ApiResponse<Void>> delete(Authentication auth, @PathVariable String id) {
         faqService.delete(auth.getName(), id);
         return ResponseEntity.ok(ApiResponse.ok("FAQ deleted", null));
     }
