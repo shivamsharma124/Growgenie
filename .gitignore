@@ -1,0 +1,23 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Java/Maven
+target/
+*.class
+.classpath
+.project
+.settings/
+.idea/
+*.iml
+
+# IDE
+.vscode/
+.DS_Store
